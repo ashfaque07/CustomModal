@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Modal</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="x-apple-disable-message-reformatting">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<style type="text/css">
+		img {
+			width: 200px;
+			height: 200px;
+			transition: .2s all;
+		}
+		.img-list li{
+			display: inline-block;
+			padding: 10px;
+		}
+		.modal-parent {
+			width: 100%;
+			height: 100%;
+			position: fixed;
+			top: 0;
+			left: 0;
+			background-color: rgba(0,0,0,0.6);
+			display: none;
+		}
+		.modal-box img{
+    width: 65%;
+    height: 76%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+		}
+		.view-Modal {
+			display: block!important;
+		}
+		.close-button {
+			position: absolute;
+			top: 4%;
+			right: 9%;
+			font-size: 60px;
+			color: #fff;
+			cursor: pointer;
+			z-index: 2
+		}
+		.left-button {
+			position: absolute;
+			top: 50%;
+			left: 9%;
+			font-size: 60px;
+			color: #fff;
+			cursor: pointer;
+			z-index: 2
+		}
+		.right-button {
+			position: absolute;
+			top: 50%;
+			right: 9%;
+			font-size: 60px;
+			color: #fff;
+			cursor: pointer;
+			z-index: 2
+		}
+		.modal-box {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: -100%;
+			transition: 1s all;
+		}
+		.mod{
+			top:0;
+			transition: 1s all;
+		}
+		.buttonDisable {
+				cursor: not-allowed;
+				opacity: .3;
+		}
+		@media screen and (max-width: 736px), yahoo and (max-width: 480px), print and (max-width: 552px){
+				.img-list{
+					width: 100%;
+						padding: 0;
+						margin: 0;
+						display: block;
+				}
+				.img-list li{
+						width: 100%;
+						padding: 0;
+						margin-top: 10px;
+						margin-bottom: 30px;
+						display: block;
+						text-align: center;
+				}
+				.img-list li img{
+						width: 80%;
+		    height: 250px;
+						border: 2px solid #000;
+				}
+				.modal-box img{
+		    width: 70%;
+		    height: 60%;
+		   }
+			.right-button {
+				right: 3%
+			}
+			.left-button {
+				left: 3%
+			}
+			.close-button {
+    top: 9%;
+    right: 4%;
+			}
+		}
+	</style>
+</head>
+<body>
+	<ul class="img-list">
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/802/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/803/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/808/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/804/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/805/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/806/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/807/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/809/200/300.jpg">
+		</li>
+		<li class="img-item">
+				<img class="mod-img" src="https://i.picsum.photos/id/810/200/300.jpg">
+		</li>
+	</ul>
+	<div class="modal-parent">
+		<div class="modal-box">
+			<span class="close-button">X</span>
+			<img class="modal-img" src="https://i.picsum.photos/id/808/200/300.jpg">
+			<span class="left-button"><</span>
+			<span class="right-button">></span>
+
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	let modalItem = document.getElementsByClassName('mod-img');
+	let modalImage = document.getElementsByClassName('modal-img')[0];
+	let left = document.getElementsByClassName('left-button')[0];
+	let right = document.getElementsByClassName('right-button')[0];
+	let modalBox = document.getElementsByClassName('modal-parent')[0];
+	let mod = document.getElementsByClassName('modal-box')[0];
+	let imgSrc;
+	let imgLength = modalItem.length-1;
+	let modalCloseButton = document.getElementsByClassName('close-button')[0];
+	for(let i=0;i<modalItem.length;i++){
+			modalItem[i].setAttribute('id',"modalImg"+i);
+			modalItem[i].addEventListener('click', function(){
+			imgSrc = this.getAttribute('id');
+			if (imgSrc == "modalImg0") {
+				left.classList.add('buttonDisable');
+			}
+			else {
+				left.classList.remove('buttonDisable');
+			}
+			if (imgSrc == "modalImg"+imgLength) {
+				right.classList.add('buttonDisable');
+			}
+			else {
+				right.classList.remove('buttonDisable');
+			}
+			modalImage.setAttribute('src', this.getAttribute('src'));		
+			modalBox.classList.add('view-Modal');
+			setTimeout(function(){mod.classList.add('mod');}, 10);
+		});
+	}
+	modalCloseButton.addEventListener('click',function(){
+		setTimeout(function(){modalBox.classList.remove('view-Modal');}, 1100);
+		mod.classList.remove('mod');
+	});
+left.addEventListener('click',function(){
+			var imgNo = imgSrc.split("modalImg")[1];
+			if (imgSrc != "modalImg0") {
+					imgNo--;
+					imgSrc = "modalImg" + imgNo;
+					if (imgSrc == "modalImg0") { left.classList.add('buttonDisable'); }
+					modalImage.setAttribute('src', document.getElementById(imgSrc).getAttribute('src'));
+				right.classList.remove('buttonDisable');
+			}
+});
+
+right.addEventListener('click',function(){
+			var imgNo = imgSrc.split("modalImg")[1];
+			if (imgSrc != "imgLength"+imgLength) {
+					imgNo++;
+					imgSrc = "modalImg" + imgNo;
+					if (imgSrc == "modalImg"+imgLength) { right.classList.add('buttonDisable'); }
+					modalImage.setAttribute('src', document.getElementById(imgSrc).getAttribute('src'));
+				left.classList.remove('buttonDisable');
+			}
+});
+
+
+</script>
+</html>
