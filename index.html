@@ -77,6 +77,10 @@
 			top:0;
 			transition: 1s all;
 		}
+		.mod1{
+			top:100%;
+			transition: 1s all;
+		}
 		.buttonDisable {
 				cursor: not-allowed;
 				opacity: .3;
@@ -187,10 +191,12 @@
 			modalImage.setAttribute('src', this.getAttribute('src'));		
 			modalBox.classList.add('view-Modal');
 			setTimeout(function(){mod.classList.add('mod');}, 10);
+		mod.classList.remove('mod1');
 		});
 	}
 	modalCloseButton.addEventListener('click',function(){
 		setTimeout(function(){modalBox.classList.remove('view-Modal');}, 1100);
+		mod.classList.add('mod1');
 		mod.classList.remove('mod');
 	});
 left.addEventListener('click',function(){
